@@ -11,6 +11,7 @@
 </head>
 
 <body>
+    <div class="se-pre-con"></div>
     <div class="container" id="page-container">
         <h1>
 
@@ -24,6 +25,18 @@
         <div id="tabletest">
             <table class="table">
                 <tr>
+                    <td>Country</td>
+                    <td><span id="country"></span></td>
+                </tr>
+                <tr>
+                    <td>Sunrise</td>
+                    <td><span id="sunrise"></span></td>
+                </tr>
+                <tr>
+                    <td>Sunset</td>
+                    <td><span id="sunset"></span></td>
+                </tr>
+                <tr>
                     <td>Temperature </td>
                     <td><span id="temperature"></span></td>
                 </tr>
@@ -34,10 +47,6 @@
                 <tr>
                     <td>Low </td>
                     <td><span id="lowtemp"></span></td>
-                </tr>
-                <tr>
-                    <td>Location </td>
-                    <td><span id="location"></span></td>
                 </tr>
                 <tr>
                     <td>Humidity</td>
@@ -51,22 +60,12 @@
                     <td>Direction of Wind</td>
                     <td><span id="directionofwind"></span></td>
                 </tr>
-                <tr>
-                    <td>Country</td>
-                    <td><span id="country"></span></td>
-                </tr>
+
                 <tr>
                     <td>Pressure</td>
                     <td><span id="pressure"></span></td>
                 </tr>
-                <tr>
-                    <td>Sunrise</td>
-                    <td><span id="sunrise"></span></td>
-                </tr>
-                <tr>
-                    <td>Sunset</td>
-                    <td><span id="sunset"></span></td>
-                </tr>
+
             </table>
         </div>
 
@@ -178,6 +177,7 @@
 
     <!--jQuery Script-->
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
     <!--Bootstrap Script-->
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <!--Custom Script-->

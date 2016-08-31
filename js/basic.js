@@ -1,15 +1,18 @@
 var subscriptionKey = "a5c73d2705c60263ede71ef16dee8137";
 
 $(document).ready(function () {
+
     if (navigator.geolocation) {
         console.log("in navigation");
         navigator.geolocation.getCurrentPosition(findPosition, fail);
+    } else {
+           $("#head").text("Please enable geolocation for this application to work");
     }
+    $(".se-pre-con").fadeOut(3000);
 });
 
 function setInfo(weatherInfo) {
     $("#temperature").text(weatherInfo.temperature);
-    $("#location").text(weatherInfo.place);
     $("#humidity").text(weatherInfo.humidity + " %");
     $("#wind").text(weatherInfo.windSpeed);
     $("#directionofwind").text(weatherInfo.windDirection);
@@ -90,7 +93,7 @@ function updateUsingCurrentPosition(latitude, longitude) {
             setInfo(weatherInfo);
         },
         error: function () {
-            alert("error");
+            alert("error you need geolocation on for this application to work");
         }
     });
 
@@ -270,11 +273,11 @@ function getMonthOfYear(month) {
 function formatDateTime(hour,minute) {
     var timeset = "";
     if (hour < 12) {
-        timeset = "AM";
+        timeset = "am";
     } else if (hour == 12) {
-        timeset = "PM"
+        timeset = "pm"
     } else {
-        timeset = "PM";
+        timeset = "pm";
         hour = hour - 12;
     }
 
