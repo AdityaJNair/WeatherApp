@@ -19,36 +19,36 @@ function setInfo(weatherInfo) {
     $("#pressure").text(weatherInfo.pressure);
     $("#sunrise").text(weatherInfo.sunrise + " am");
     $("#sunset").text(weatherInfo.sunset + " pm");
-    $("#para").text("We are expecting " + weatherInfo.description + " today");
-    $("#head").text("The weather in " + toTitleCase(weatherInfo.place) + " is " + weatherInfo.main.toLowerCase());
+    $("#para").text("We are expecting " + weatherInfo.description + " today ("+ getDayOfWeek(new Date().getDay()) + ", " + new Date().getDate() + " " + getMonthOfYear(new Date().getMonth()) + " " + new Date().getFullYear() + ")");
+    $("#head").text("The time in " + toTitleCase(weatherInfo.place)+ " is " + formatDateTime(new Date().getHours(), new Date().getMinutes()) + ". The weather is " + weatherInfo.main.toLowerCase() + ".");
     $("#mainimage").attr("src", getIconURL(weatherInfo.icon));
 }
 
 function setDaysInfo(days) {
     $("#imageday2").attr("src", getIconURL(days[0].icon));
     $("#dateday2").text(days[0].date);
-        $("#datetimeday2").text(days[0].time);
+    $("#datetimeday2").text(days[0].time);
     $("#datedsecribeday2").text(days[0].main + " : " + days[0].description);
     $("#maxtempday2").text(days[0].temp_max)
     $("#mintempday2").text(days[0].temp_min);
 
     $("#imageday3").attr("src", getIconURL(days[1].icon));
     $("#dateday3").text(days[1].date);
-            $("#datetimeday3").text(days[1].time);
+    $("#datetimeday3").text(days[1].time);
     $("#datedsecribeday3").text(days[1].main + " : " + days[1].description);
     $("#maxtempday3").text(days[1].temp_max)
     $("#mintempday3").text(days[1].temp_min);
 
     $("#imageday4").attr("src", getIconURL(days[2].icon));
     $("#dateday4").text(days[2].date);
-            $("#datetimeday4").text(days[2].time);
+    $("#datetimeday4").text(days[2].time);
     $("#datedsecribeday4").text(days[2].main + " : " + days[2].description);
     $("#maxtempday4").text(days[2].temp_max)
     $("#mintempday4").text(days[2].temp_min);
 
     $("#imageday5").attr("src", getIconURL(days[3].icon));
     $("#dateday5").text(days[3].date);
-            $("#datetimeday5").text(days[3].time);
+    $("#datetimeday5").text(days[3].time);
     $("#datedsecribeday5").text(days[3].main + " : " + days[3].description);
     $("#maxtempday5").text(days[3].temp_max)
     $("#mintempday5").text(days[3].temp_min);
@@ -122,7 +122,7 @@ function updateUsingCurrentPosition(latitude, longitude) {
             weatherInfoD3.temp_min = Math.round(data.list[16].main.temp_min) - 273 + "°C";
             weatherInfoD3.temp_max = Math.round(data.list[16].main.temp_max) - 273 + "°C";
             weatherInfoD3.date = formatDate(data.list[16].dt_txt);
-                      weatherInfoD3.time = formatHeaderTime(data.list[16].dt_txt);
+            weatherInfoD3.time = formatHeaderTime(data.list[16].dt_txt);
             weatherInfoD3.main = data.list[16].weather[0].main;
             weatherInfoD3.description = data.list[16].weather[0].description;
             weatherInfoD3.icon = data.list[16].weather[0].icon;
@@ -130,7 +130,7 @@ function updateUsingCurrentPosition(latitude, longitude) {
             weatherInfoD4.temp_min = Math.round(data.list[24].main.temp_min) - 273 + "°C";
             weatherInfoD4.temp_max = Math.round(data.list[24].main.temp_max) - 273 + "°C";
             weatherInfoD4.date = formatDate(data.list[24].dt_txt);
-                      weatherInfoD4.time = formatHeaderTime(data.list[24].dt_txt);
+            weatherInfoD4.time = formatHeaderTime(data.list[24].dt_txt);
             weatherInfoD4.main = data.list[24].weather[0].main;
             weatherInfoD4.description = data.list[24].weather[0].description;
             weatherInfoD4.icon = data.list[24].weather[0].icon;
@@ -138,7 +138,7 @@ function updateUsingCurrentPosition(latitude, longitude) {
             weatherInfoD5.temp_min = Math.round(data.list[32].main.temp_min) - 273 + "°C";
             weatherInfoD5.temp_max = Math.round(data.list[32].main.temp_max) - 273 + "°C";
             weatherInfoD5.date = formatDate(data.list[32].dt_txt);
-                      weatherInfoD5.time = formatHeaderTime(data.list[32].dt_txt);
+            weatherInfoD5.time = formatHeaderTime(data.list[32].dt_txt);
             weatherInfoD5.main = data.list[32].weather[0].main;
             weatherInfoD5.description = data.list[32].weather[0].description;
             weatherInfoD5.icon = data.list[32].weather[0].icon;
@@ -216,9 +216,9 @@ function formatDate(date) {
     return getDayOfWeek(newDate.getDay()) + ", " + newDate.getDate() + " " + getMonthOfYear(newDate.getMonth()) + " " + newDate.getFullYear();
 }
 
-function formatHeaderTime(date){
-      var newDate = new Date(date.replace(/-/g, "/"));
-      return formatDateTime(newDate.getHours());
+function formatHeaderTime(date) {
+    var newDate = new Date(date.replace(/-/g, "/"));
+    return formatDateTime(newDate.getHours(), newDate.getMinutes());
 }
 
 function getDayOfWeek(day) {
@@ -267,7 +267,7 @@ function getMonthOfYear(month) {
     }
 }
 
-function formatDateTime(hour) {
+function formatDateTime(hour,minute) {
     var timeset = "";
     if (hour < 12) {
         timeset = "AM";
@@ -277,5 +277,6 @@ function formatDateTime(hour) {
         timeset = "PM";
         hour = hour - 12;
     }
-    return hour + ":00 " + timeset;
+
+    return hour + ":"+ ("0" + minute).slice(-2)+" " + timeset;
 }
