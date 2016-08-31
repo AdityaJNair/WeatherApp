@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>ATHOP Bus Finder</title>
+    <!--Boostrap's CSS-->
+    <link rel="stylesheet" type="text/css" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <!--Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+
+<body>
+    <div class="container" id="page-container">
+        <h1 id="Bus checker">
+            <span class="glyphicon glyphicon-random"></span> Wheres my bus!!
+        </h1>
+        <!--  Find bus routes from this start point -->
+        <div class="start-route">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="sourcebusstop">Bus Stop Number</label>
+                    <input type="text" class="form-control" id="stopid" placeholder="7150">
+                </div>
+                <button type="button" class="btn btn-default" id="btnstopid">Check stop schedule</button>
+            </form>
+            <span id="searchedat">Date</span>
+            <span id="startrouteaddress">Stop location</span>
+        </div>
+    </div>
+    <p id="para">testing one two there</p>
+    <!--  Placeholder for the data to go through -->
+    <div class="row">
+        <div class="col-md-2">.Bus Number-2</div>
+        <div class="col-md-6">.Destination-6</div>
+        <div class="col-md-2">.Scheduled Arrival Time-2</div>
+        <div class="col-md-2">.Due to arrive in-2</div>
+    </div>
+    <!--jQuery Script-->
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <!--Bootstrap Script-->
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!--Custom Script-->
+    <script src="./js/basic.js"></script>
+</body>
+
+</html>
