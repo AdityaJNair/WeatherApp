@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>ATHOP Bus Finder</title>
+    <title>Weather application</title>
     <!--Boostrap's CSS-->
     <link rel="stylesheet" type="text/css" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <!--Custom CSS-->
@@ -13,29 +13,52 @@
 <body>
     <div class="container" id="page-container">
         <h1 id="Bus checker">
-            <span class="glyphicon glyphicon-random"></span> Wheres my bus!!
+            <span class="glyphicon glyphicon-cloud"></span> Whats the current weather for me?
         </h1>
-        <!--  Find bus routes from this start point -->
-        <div class="start-route">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="sourcebusstop">Bus Stop Number</label>
-                    <input type="text" class="form-control" id="stopid" placeholder="7150">
-                </div>
-                <button type="button" class="btn btn-default" id="btnstopid">Check stop schedule</button>
-            </form>
-            <span id="searchedat">Date</span>
-            <span id="startrouteaddress">Stop location</span>
+        <p id="para">testing one two there</p>
+        <spam id="weather">weather image</spam>
+        <div id="tabletest">
+            <table class="table">
+                <tr>
+                    <td>Temperature </td>
+                    <td><span id="temperature"></span></td>
+                </tr>
+                <tr>
+                    <td>High </td>
+                    <td><span id="hightemp"></span></td>
+                </tr>
+                <tr>
+                    <td>Low </td>
+                    <td><span id="lowtemp"></span></td>
+                </tr>
+                <tr>
+                    <td>Location </td>
+                    <td><span id="location"></span></td>
+                </tr>
+                <tr>
+                    <td>Humidity</td>
+                    <td><span id="humidity"></span></td>
+                </tr>
+                <tr>
+                    <td>Wind</td>
+                    <td><span id="wind"></span></td>
+                </tr>
+                <tr>
+                    <td>Direction of Wind</td>
+                    <td><span id="directionofwind"></span></td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td><span id="country"></span></td>
+                </tr>
+                <tr>
+                    <td>Pressure</td>
+                    <td><span id="pressure"></span></td>
+                </tr>
+            </table>
         </div>
     </div>
-    <p id="para">testing one two there</p>
-    <!--  Placeholder for the data to go through -->
-    <div class="row">
-        <div class="col-md-2">.Bus Number-2</div>
-        <div class="col-md-6">.Destination-6</div>
-        <div class="col-md-2">.Scheduled Arrival Time-2</div>
-        <div class="col-md-2">.Due to arrive in-2</div>
-    </div>
+
     <!--jQuery Script-->
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
     <!--Bootstrap Script-->
