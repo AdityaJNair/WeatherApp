@@ -10,7 +10,7 @@ $(document).ready(function () {
 function setInfo(weatherInfo) {
     $("#temperature").text(weatherInfo.temperature);
     $("#location").text(weatherInfo.place);
-    $("#humidity").text(weatherInfo.humidity+" %");
+    $("#humidity").text(weatherInfo.humidity + " %");
     $("#wind").text(weatherInfo.windSpeed);
     $("#directionofwind").text(weatherInfo.windDirection);
     $("#hightemp").text(weatherInfo.temp_max);
@@ -22,6 +22,36 @@ function setInfo(weatherInfo) {
     $("#para").text("We are expecting " + weatherInfo.description + " today");
     $("#head").text("The weather in " + toTitleCase(weatherInfo.place) + " is " + weatherInfo.main.toLowerCase());
     $("#mainimage").attr("src", getIconURL(weatherInfo.icon));
+}
+
+function setDaysInfo(days) {
+    $("#imageday2").attr("src", getIconURL(days[0].icon));
+    $("#dateday2").text(days[0].date);
+        $("#datetimeday2").text(days[0].time);
+    $("#datedsecribeday2").text(days[0].main + " : " + days[0].description);
+    $("#maxtempday2").text(days[0].temp_max)
+    $("#mintempday2").text(days[0].temp_min);
+
+    $("#imageday3").attr("src", getIconURL(days[1].icon));
+    $("#dateday3").text(days[1].date);
+            $("#datetimeday3").text(days[1].time);
+    $("#datedsecribeday3").text(days[1].main + " : " + days[1].description);
+    $("#maxtempday3").text(days[1].temp_max)
+    $("#mintempday3").text(days[1].temp_min);
+
+    $("#imageday4").attr("src", getIconURL(days[2].icon));
+    $("#dateday4").text(days[2].date);
+            $("#datetimeday4").text(days[2].time);
+    $("#datedsecribeday4").text(days[2].main + " : " + days[2].description);
+    $("#maxtempday4").text(days[2].temp_max)
+    $("#mintempday4").text(days[2].temp_min);
+
+    $("#imageday5").attr("src", getIconURL(days[3].icon));
+    $("#dateday5").text(days[3].date);
+            $("#datetimeday5").text(days[3].time);
+    $("#datedsecribeday5").text(days[3].main + " : " + days[3].description);
+    $("#maxtempday5").text(days[3].temp_max)
+    $("#mintempday5").text(days[3].temp_min);
 }
 
 function updateUsingCurrentPosition(latitude, longitude) {
@@ -69,25 +99,50 @@ function updateUsingCurrentPosition(latitude, longitude) {
         type: "GET",
         url: "http://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=" + subscriptionKey,
         success: function (data) {
-            console.log(data.list[0].dt_txt);
-            console.log(data.list[8].dt_txt);
-            console.log(data.list[16].dt_txt);
-            console.log(data.list[24].dt_txt);
-            console.log(data.list[32].dt_txt);
+            console.log(formatDate(data.list[8].dt_txt));
+            console.log(formatDate(data.list[16].dt_txt));
+            console.log(formatDate(data.list[24].dt_txt));
+            console.log(formatDate(data.list[32].dt_txt));
 
-            /*
-                        var weatherInfo = {};
-                        weatherInfo.humidity = data.main.humidity;
-                        weatherInfo.temperature = Math.round(data.main.temp) - 273 + "°C";
-                        weatherInfo.windSpeed = data.wind.speed + " m/s";
-                        weatherInfo.place = toTitleCase(data.name);
-                        weatherInfo.windDirection = getPosition(data.wind.deg);
-                        weatherInfo.country = data.sys.country;
-                        weatherInfo.temp_min = Math.round(data.main.temp_min) - 273 + "°C";
-                        weatherInfo.temp_max = Math.round(data.main.temp_max) - 273 + "°C";
-                        weatherInfo.pressure = data.main.pressure + " hpa";
-                        weatherInfo.icon = data.weather[0].icon;
-                        setInfo(weatherInfo);*/
+            var weatherInfoD2 = {};
+            var weatherInfoD3 = {};
+            var weatherInfoD4 = {};
+            var weatherInfoD5 = {};
+            var days = [weatherInfoD2, weatherInfoD3, weatherInfoD4, weatherInfoD5];
+
+            //day two
+            weatherInfoD2.temp_min = Math.round(data.list[8].main.temp_min) - 273 + "°C";
+            weatherInfoD2.temp_max = Math.round(data.list[8].main.temp_max) - 273 + "°C";
+            weatherInfoD2.date = formatDate(data.list[8].dt_txt);
+            weatherInfoD2.time = formatHeaderTime(data.list[8].dt_txt);
+            weatherInfoD2.main = data.list[8].weather[0].main;
+            weatherInfoD2.description = data.list[8].weather[0].description;
+            weatherInfoD2.icon = data.list[8].weather[0].icon;
+            //day three
+            weatherInfoD3.temp_min = Math.round(data.list[16].main.temp_min) - 273 + "°C";
+            weatherInfoD3.temp_max = Math.round(data.list[16].main.temp_max) - 273 + "°C";
+            weatherInfoD3.date = formatDate(data.list[16].dt_txt);
+                      weatherInfoD3.time = formatHeaderTime(data.list[16].dt_txt);
+            weatherInfoD3.main = data.list[16].weather[0].main;
+            weatherInfoD3.description = data.list[16].weather[0].description;
+            weatherInfoD3.icon = data.list[16].weather[0].icon;
+            //day four
+            weatherInfoD4.temp_min = Math.round(data.list[24].main.temp_min) - 273 + "°C";
+            weatherInfoD4.temp_max = Math.round(data.list[24].main.temp_max) - 273 + "°C";
+            weatherInfoD4.date = formatDate(data.list[24].dt_txt);
+                      weatherInfoD4.time = formatHeaderTime(data.list[24].dt_txt);
+            weatherInfoD4.main = data.list[24].weather[0].main;
+            weatherInfoD4.description = data.list[24].weather[0].description;
+            weatherInfoD4.icon = data.list[24].weather[0].icon;
+            //day five
+            weatherInfoD5.temp_min = Math.round(data.list[32].main.temp_min) - 273 + "°C";
+            weatherInfoD5.temp_max = Math.round(data.list[32].main.temp_max) - 273 + "°C";
+            weatherInfoD5.date = formatDate(data.list[32].dt_txt);
+                      weatherInfoD5.time = formatHeaderTime(data.list[32].dt_txt);
+            weatherInfoD5.main = data.list[32].weather[0].main;
+            weatherInfoD5.description = data.list[32].weather[0].description;
+            weatherInfoD5.icon = data.list[32].weather[0].icon;
+            setDaysInfo(days);
         },
         error: function () {
             alert("error");
@@ -156,3 +211,71 @@ var formatTime = function (unixTimestamp) {
     return time;
 }
 
+function formatDate(date) {
+    var newDate = new Date(date.replace(/-/g, "/"));
+    return getDayOfWeek(newDate.getDay()) + ", " + newDate.getDate() + " " + getMonthOfYear(newDate.getMonth()) + " " + newDate.getFullYear();
+}
+
+function formatHeaderTime(date){
+      var newDate = new Date(date.replace(/-/g, "/"));
+      return formatDateTime(newDate.getHours());
+}
+
+function getDayOfWeek(day) {
+    if (day == 0) {
+        return "Sunday";
+    } else if (day == 1) {
+        return "Monday";
+    } else if (day == 2) {
+        return "Tuesday";
+    } else if (day == 3) {
+        return "Wednesday";
+    } else if (day == 4) {
+        return "Thursday";
+    } else if (day == 5) {
+        return "Friday";
+    } else {
+        return "Saturday";
+    }
+}
+
+function getMonthOfYear(month) {
+    if (month == 0) {
+        return "January";
+    } else if (month == 1) {
+        return "February";
+    } else if (month == 2) {
+        return "March";
+    } else if (month == 3) {
+        return "April";
+    } else if (month == 4) {
+        return "May";
+    } else if (month == 5) {
+        return "June";
+    } else if (month == 6) {
+        return "July";
+    } else if (month == 7) {
+        return "August";
+    } else if (month == 8) {
+        return "September";
+    } else if (month == 9) {
+        return "October";
+    } else if (month == 10) {
+        return "November";
+    } else {
+        return "December";
+    }
+}
+
+function formatDateTime(hour) {
+    var timeset = "";
+    if (hour < 12) {
+        timeset = "AM";
+    } else if (hour == 12) {
+        timeset = "PM"
+    } else {
+        timeset = "PM";
+        hour = hour - 12;
+    }
+    return hour + ":00 " + timeset;
+}
