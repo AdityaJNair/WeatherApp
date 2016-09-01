@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="./css/uistyle.css">
     <link rel="stylesheet" type="text/css" href="./css/alertify.css">
     <link rel="stylesheet" type="text/css" href="./css/alertify.default.css">
-        <link rel="stylesheet" type="text/css" href="./css/alertify.core.css">
+    <link rel="stylesheet" type="text/css" href="./css/alertify.core.css">
 
     <!--Boostrap's CSS-->
     <link rel="stylesheet" type="text/css" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
@@ -17,6 +17,14 @@
 </head>
 
 <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
     <div class="se-pre-con"></div>
     <div class="container" id="page-container">
         <h1>
@@ -185,6 +193,7 @@
 
             </div>
         </div>
+        <div class="fb-like" data-href="http://currentweatherupdate.azurewebsites.net/" data-layout="standard" data-action="recommend" data-size="large" data-show-faces="true" data-share="true"></div>
     </div>
 
     <!--jQuery Script-->
@@ -202,7 +211,7 @@
     <!--Bootstrap Script-->
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <!--Custom Script-->
-        <script src="./js/alertify.min.js"></script>
+    <script src="./js/alertify.min.js"></script>
     <script src="./js/basic.js"></script>
 </body>
 
