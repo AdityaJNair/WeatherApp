@@ -1,12 +1,12 @@
 var subscriptionKey = "a5c73d2705c60263ede71ef16dee8137";
 
 $(document).ready(function () {
-               
+
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(findPosition, fail);
     } else {
-           $("#head").text("Please enable geolocation for this application to work");
-           alertify.alert("You need geolocation to be enabled for this application to work");
+        //$("#head").text("Please enable geolocation for this application to work");
+
     }
     $(".se-pre-con").fadeOut(3000);
 });
@@ -22,8 +22,8 @@ function setInfo(weatherInfo) {
     $("#pressure").text(weatherInfo.pressure);
     $("#sunrise").text(weatherInfo.sunrise + " am");
     $("#sunset").text(weatherInfo.sunset + " pm");
-    $("#para").text("We are expecting " + weatherInfo.description + " today ("+ getDayOfWeek(new Date().getDay()) + ", " + new Date().getDate() + " " + getMonthOfYear(new Date().getMonth()) + " " + new Date().getFullYear() + ")");
-    $("#head").text("The time in " + toTitleCase(weatherInfo.place)+ " is " + formatDateTime(new Date().getHours(), new Date().getMinutes()) + ". The forecast for today is " + weatherInfo.main.toLowerCase() + ".");
+    $("#para").text("We are expecting " + weatherInfo.description + " today (" + getDayOfWeek(new Date().getDay()) + ", " + new Date().getDate() + " " + getMonthOfYear(new Date().getMonth()) + " " + new Date().getFullYear() + ")");
+    $("#head").text("The time in " + toTitleCase(weatherInfo.place) + " is " + formatDateTime(new Date().getHours(), new Date().getMinutes()) + ". The forecast for today is " + weatherInfo.main.toLowerCase() + ".");
     $("#mainimage").attr("src", getIconURL(weatherInfo.icon));
 }
 
@@ -137,16 +137,102 @@ function updateUsingCurrentPosition(latitude, longitude) {
 
 }
 
+function updateUsingGivenPosition(str) {
+    $.ajax({
+        dataType: "jsonp",
+        type: "GET",
+        url: "http://api.openweathermap.org/data/2.5/weather?q=" + str + "&appid=" + subscriptionKey,
+        success: function (data) {
+            var weatherInfo = {};
+            weatherInfo.humidity = data.main.humidity;
+            weatherInfo.temperature = Math.round(data.main.temp) - 273 + "°C";
+            weatherInfo.windSpeed = data.wind.speed + " m/s";
+            weatherInfo.place = toTitleCase(data.name);
+            weatherInfo.windDirection = getPosition(data.wind.deg);
+            weatherInfo.country = data.sys.country;
+            weatherInfo.temp_min = Math.round(data.main.temp_min) - 273 + "°C";
+            weatherInfo.temp_max = Math.round(data.main.temp_max) - 273 + "°C";
+            weatherInfo.pressure = data.main.pressure + " hpa";
+            weatherInfo.icon = data.weather[0].icon;
+            weatherInfo.sunrise = formatTime(data.sys.sunrise);
+            weatherInfo.sunset = formatTime(data.sys.sunset);
+            weatherInfo.main = data.weather[0].main;
+            weatherInfo.description = data.weather[0].description;
+            setInfo(weatherInfo);
+        },
+        error: function () {
+            alertify.alert("Error in ajax query. Unable to get information.")
+        }
+    });
+
+    $.ajax({
+        dataType: "jsonp",
+        type: "GET",
+        url: "http://api.openweathermap.org/data/2.5/forecast?q=" + str + "&appid=" + subscriptionKey,
+        success: function (data) {
+            var weatherInfoD2 = {};
+            var weatherInfoD3 = {};
+            var weatherInfoD4 = {};
+            var weatherInfoD5 = {};
+            var days = [weatherInfoD2, weatherInfoD3, weatherInfoD4, weatherInfoD5];
+
+            //day two
+            weatherInfoD2.temp_min = Math.round(data.list[8].main.temp_min) - 273 + "°C";
+            weatherInfoD2.temp_max = Math.round(data.list[8].main.temp_max) - 273 + "°C";
+            weatherInfoD2.date = formatDate(data.list[8].dt_txt);
+            weatherInfoD2.time = formatHeaderTime(data.list[8].dt_txt);
+            weatherInfoD2.main = data.list[8].weather[0].main;
+            weatherInfoD2.description = data.list[8].weather[0].description;
+            weatherInfoD2.icon = data.list[8].weather[0].icon;
+            //day three
+            weatherInfoD3.temp_min = Math.round(data.list[16].main.temp_min) - 273 + "°C";
+            weatherInfoD3.temp_max = Math.round(data.list[16].main.temp_max) - 273 + "°C";
+            weatherInfoD3.date = formatDate(data.list[16].dt_txt);
+            weatherInfoD3.time = formatHeaderTime(data.list[16].dt_txt);
+            weatherInfoD3.main = data.list[16].weather[0].main;
+            weatherInfoD3.description = data.list[16].weather[0].description;
+            weatherInfoD3.icon = data.list[16].weather[0].icon;
+            //day four
+            weatherInfoD4.temp_min = Math.round(data.list[24].main.temp_min) - 273 + "°C";
+            weatherInfoD4.temp_max = Math.round(data.list[24].main.temp_max) - 273 + "°C";
+            weatherInfoD4.date = formatDate(data.list[24].dt_txt);
+            weatherInfoD4.time = formatHeaderTime(data.list[24].dt_txt);
+            weatherInfoD4.main = data.list[24].weather[0].main;
+            weatherInfoD4.description = data.list[24].weather[0].description;
+            weatherInfoD4.icon = data.list[24].weather[0].icon;
+            //day five
+            weatherInfoD5.temp_min = Math.round(data.list[32].main.temp_min) - 273 + "°C";
+            weatherInfoD5.temp_max = Math.round(data.list[32].main.temp_max) - 273 + "°C";
+            weatherInfoD5.date = formatDate(data.list[32].dt_txt);
+            weatherInfoD5.time = formatHeaderTime(data.list[32].dt_txt);
+            weatherInfoD5.main = data.list[32].weather[0].main;
+            weatherInfoD5.description = data.list[32].weather[0].description;
+            weatherInfoD5.icon = data.list[32].weather[0].icon;
+            setDaysInfo(days);
+        },
+        error: function () {
+            alertify.alert("Error in ajax query. Unable to get information.")
+        }
+    });
+
+}
+
 function findPosition(pos) {
     var coordinates = pos.coords;
     var crd = pos.coords;
     $("#latitude").text(crd.latitude);
-    $("#longitude").text(crd.longitude); 
+    $("#longitude").text(crd.longitude);
     updateUsingCurrentPosition(crd.latitude, crd.longitude);
 }
 
 function fail() {
-    alertify.alert("Unable to get your current position. Try a different browser (not chrome) or maybe try again in a few minutes or in another location?");
+    alertify.prompt("Your GPS is disabled, please enable it or enter in your city, country", function (e, str) {
+        if (e) {
+            updateUsingGivenPosition(str);
+        } else {
+            alertify.error("Thanks for visiting. To view again, refresh your webpage.");
+        }
+    }, "Auckland");
 }
 
 function toTitleCase(str) {
@@ -250,7 +336,7 @@ function getMonthOfYear(month) {
     }
 }
 
-function formatDateTime(hour,minute) {
+function formatDateTime(hour, minute) {
     var timeset = "";
     if (hour < 12) {
         timeset = "am";
@@ -261,5 +347,5 @@ function formatDateTime(hour,minute) {
         hour = hour - 12;
     }
 
-    return hour + ":"+ ("0" + minute).slice(-2)+" " + timeset;
+    return hour + ":" + ("0" + minute).slice(-2) + " " + timeset;
 }
