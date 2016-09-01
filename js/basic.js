@@ -25,6 +25,8 @@ function setInfo(weatherInfo) {
     $("#para").text("We are expecting " + weatherInfo.description + " today (" + getDayOfWeek(new Date().getDay()) + ", " + new Date().getDate() + " " + getMonthOfYear(new Date().getMonth()) + " " + new Date().getFullYear() + ")");
     $("#head").text("The time in " + toTitleCase(weatherInfo.place) + " is " + formatDateTime(new Date().getHours(), new Date().getMinutes()) + ". The forecast for today is " + weatherInfo.main.toLowerCase() + ".");
     $("#mainimage").attr("src", getIconURL(weatherInfo.icon));
+    $("#latitude").text(weatherInfo.latitude);
+    $("#longitude").text(weatherInfo.longitude);
 }
 
 function setDaysInfo(days) {
@@ -158,6 +160,8 @@ function updateUsingGivenPosition(str) {
             weatherInfo.sunset = formatTime(data.sys.sunset);
             weatherInfo.main = data.weather[0].main;
             weatherInfo.description = data.weather[0].description;
+            weatherInfo.latitude = data.coord.lat;
+            weatherInfo.longitude = data.coord.lon;
             setInfo(weatherInfo);
         },
         error: function () {
