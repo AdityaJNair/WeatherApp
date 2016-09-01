@@ -61,7 +61,7 @@ function updateUsingCurrentPosition(latitude, longitude) {
     $.ajax({
         dataType: "jsonp",
         type: "GET",
-        url: "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + subscriptionKey,
+        url: "http://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&appid=" + subscriptionKey,
         success: function (data) {
             var weatherInfo = {};
             weatherInfo.humidity = data.main.humidity;
@@ -88,7 +88,7 @@ function updateUsingCurrentPosition(latitude, longitude) {
     $.ajax({
         dataType: "jsonp",
         type: "GET",
-        url: "https://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=" + subscriptionKey,
+        url: "http://api.openweathermap.org/data/2.5/forecast?lat=" + latitude + "&lon=" + longitude + "&appid=" + subscriptionKey,
         success: function (data) {
             var weatherInfoD2 = {};
             var weatherInfoD3 = {};
