@@ -12,3 +12,26 @@ if it's not present, don't show loader */
 	z-index: 9999;
 	background: url(Preloader_3.gif) center no-repeat #fff;
 }
+
+body { 
+  background: url(background0.png) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#page-container {
+	margin-top: 50px;
+	border-style: solid;
+    border-width: 4px;
+	background-color: #FFFFF1;
+}
+.caption{
+	background-color: FAFAFA;
+}
+
+#accordion{
+	padding-top: 25px;
+	padding-bottom: 25px;
+}

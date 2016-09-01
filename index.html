@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Weather application</title>
-    <!--Boostrap's CSS-->
-    <link rel="stylesheet" type="text/css" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <!--Custom CSS-->
     <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/uistyle.css">   
+    <!--Boostrap's CSS-->
+    <link rel="stylesheet" type="text/css" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+
 </head>
 
 <body>
@@ -24,10 +26,6 @@
         </h2>
         <div id="tabletest">
             <table class="table">
-                <tr>
-                    <td>Country</td>
-                    <td><span id="country"></span></td>
-                </tr>
                 <tr>
                     <td>Sunrise</td>
                     <td><span id="sunrise"></span></td>
@@ -52,10 +50,12 @@
                     <td>Humidity</td>
                     <td><span id="humidity"></span></td>
                 </tr>
+
                 <tr>
                     <td>Wind</td>
                     <td><span id="wind"></span></td>
                 </tr>
+
                 <tr>
                     <td>Direction of Wind</td>
                     <td><span id="directionofwind"></span></td>
@@ -68,11 +68,19 @@
 
             </table>
         </div>
+        <div id="accordion">
+            <h3>Country</h3>
+            <div id="country"></div>
+            <h3>Latitude</h3>
+            <div id="latitude"></div>
+            <h3>Longitude</h3>
+            <div id="longitude"></div>
+        </div>
 
         <div class="row">
             <div class="col-sm-6 col-md-3 week">
                 <div class="thumbnail">
-                    <img src="..." alt="..." id="imageday2">
+                    <img src="..." alt="..." id="imageday2" class="mini">
                     <div class="caption">
                         <h4>
                             <div id="datetimeday2"></div>
@@ -96,8 +104,8 @@
 
             </div>
             <div class="col-sm-6 col-md-3 week">
-                <div class="thumbnail">
-                    <img src="..." alt="..." id="imageday3">
+                <div class="thumbnail minidate">
+                    <img src="..." alt="..." id="imageday3" class="mini">
                     <div class="caption">
                         <h4>
                             <div id="datetimeday3"></div>
@@ -122,7 +130,7 @@
             </div>
             <div class="col-sm-6 col-md-3 week">
                 <div class="thumbnail">
-                    <img src="..." alt="..." id="imageday4">
+                    <img src="..." alt="..." id="imageday4" class="mini">
                     <div class="caption">
                         <h4>
                             <div id="datetimeday4"></div>
@@ -148,7 +156,7 @@
             </div>
             <div class="col-sm-6 col-md-3 week">
                 <div class="thumbnail">
-                    <img src="..." alt="..." id="imageday5">
+                    <img src="..." alt="..." id="imageday5" class="mini">
                     <div class="caption">
                         <h4>
                             <div id="datetimeday5"></div>
@@ -178,6 +186,14 @@
     <!--jQuery Script-->
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script>
+        $(function(){
+            $("#accordion").accordion({
+                heightStyle: "content",
+            });
+        });
+        </script>
     <!--Bootstrap Script-->
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <!--Custom Script-->

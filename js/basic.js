@@ -23,7 +23,7 @@ function setInfo(weatherInfo) {
     $("#sunrise").text(weatherInfo.sunrise + " am");
     $("#sunset").text(weatherInfo.sunset + " pm");
     $("#para").text("We are expecting " + weatherInfo.description + " today ("+ getDayOfWeek(new Date().getDay()) + ", " + new Date().getDate() + " " + getMonthOfYear(new Date().getMonth()) + " " + new Date().getFullYear() + ")");
-    $("#head").text("The time in " + toTitleCase(weatherInfo.place)+ " is " + formatDateTime(new Date().getHours(), new Date().getMinutes()) + ". The weather is " + weatherInfo.main.toLowerCase() + ".");
+    $("#head").text("The time in " + toTitleCase(weatherInfo.place)+ " is " + formatDateTime(new Date().getHours(), new Date().getMinutes()) + ". The forecast for today is " + weatherInfo.main.toLowerCase() + ".");
     $("#mainimage").attr("src", getIconURL(weatherInfo.icon));
 }
 
@@ -162,6 +162,8 @@ function findPosition(pos) {
     console.log('Latitude : ' + crd.latitude);
     console.log('Longitude: ' + crd.longitude);
     console.log('More or less ' + crd.accuracy + ' meters.');
+    $("#latitude").text(crd.latitude);
+    $("#longitude").text(crd.longitude); 
     updateUsingCurrentPosition(crd.latitude, crd.longitude);
 }
 
