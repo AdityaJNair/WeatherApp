@@ -1,12 +1,13 @@
 var subscriptionKey = "a5c73d2705c60263ede71ef16dee8137";
 
 $(document).ready(function () {
-
+               
     if (navigator.geolocation) {
         console.log("in navigation");
         navigator.geolocation.getCurrentPosition(findPosition, fail);
     } else {
            $("#head").text("Please enable geolocation for this application to work");
+           alertify.alert("You need geolocation to be enabled for this application to work");
     }
     $(".se-pre-con").fadeOut(3000);
 });
@@ -93,7 +94,7 @@ function updateUsingCurrentPosition(latitude, longitude) {
             setInfo(weatherInfo);
         },
         error: function () {
-            alert("error you need geolocation on for this application to work");
+            alertify.alert("Error in ajax query. Unable to get information.")
         }
     });
 
@@ -148,7 +149,7 @@ function updateUsingCurrentPosition(latitude, longitude) {
             setDaysInfo(days);
         },
         error: function () {
-            alert("error");
+            alertify.alert("Error in ajax query. Unable to get information.")
         }
     });
 
@@ -168,7 +169,7 @@ function findPosition(pos) {
 }
 
 function fail() {
-    alert("failed to get geo");
+    alertify.alert("Unable to get your current position, Maybe try again in a few minutes or in another location?");
 }
 
 function toTitleCase(str) {
