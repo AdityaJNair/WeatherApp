@@ -24,7 +24,7 @@ function setInfo(weatherInfo) {
     $("#pressure").text(weatherInfo.pressure);
     $("#sunrise").text(weatherInfo.sunrise + " am");
     $("#sunset").text(weatherInfo.sunset + " pm");
-    $("#para").text("We are expecting " + weatherInfo.description + " today (" + getDayOfWeek(new Date().getDay()) + ", " + new Date().getDate() + " " + getMonthOfYear(new Date().getMonth()) + " " + new Date().getFullYear() + ")");
+    $("#para").text("You are expecting " + weatherInfo.description + " today.");
     $("#head").text("Hello " + toTitleCase(weatherInfo.place) + ". The forecast for today is " + weatherInfo.main.toLowerCase() + ".");
     $("#mainimage").attr("src", getIconURL(weatherInfo.icon));
     $("#latitude").text(weatherInfo.latitude);
@@ -178,7 +178,7 @@ var formatTime = function (unixTimestamp) {
     if (minString.length < 2) {
         minutes = 0 + minutes;
     }
-    var time = hours + ':' + minutes;
+    var time = hours + ':' + ("0" + minutes).slice(-2);
     return time;
 };
 function formatDate(date) {
