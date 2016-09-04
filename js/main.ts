@@ -208,11 +208,8 @@ var formatTime = function (unixTimestamp: number) : string{
         hours = 12 - hoursRemaining;
     }
     var minutes : number = date.getMinutes();
-    var minString: string = minutes.toString();
-    if (minString.length < 2) {
-        minutes = 0 + minutes;
-    }
-    var time : string = hours + ':' + ("0" + minutes).slice(-2);
+
+    var time : string = hours + ':' + ("0" + minutes).slice(-2) ;
     return time;
 }
 

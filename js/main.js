@@ -174,10 +174,6 @@ var formatTime = function (unixTimestamp) {
         hours = 12 - hoursRemaining;
     }
     var minutes = date.getMinutes();
-    var minString = minutes.toString();
-    if (minString.length < 2) {
-        minutes = 0 + minutes;
-    }
     var time = hours + ':' + ("0" + minutes).slice(-2);
     return time;
 };
